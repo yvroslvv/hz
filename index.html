@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="master.css">
+</head>
+<body>
+    <div id="trigger"></div>
+<div id='container'></div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.5.0/lottie.js'></script>
+
+<script>
+    var theWindow = $(window);
+var winHeight = theWindow.height();
+var animDuration = winHeight * 4;
+var animData = {
+        container: document.getElementById('container'),
+        renderer: 'canvas',
+        loop: false,
+        autoplay: false,
+        path: 'https://gist.githubusercontent.com/yvroslvv/9d8ac99ec07dfdb5cb0927f7045909a8/raw/7b754a5b7707c42bbd1c5de863aeb480ed4bf10f/animation_1.json'
+    };
+var anim = bodymovin.loadAnimation(animData);
+
+$( window ).scroll(function() {
+	animatebodymovin(animDuration, anim);
+});
+
+function animatebodymovin(duration, animObject) {
+	
+	var scrollPosition = theWindow.scrollTop();
+	var maxFrames = animObject.totalFrames;
+	var frame = (maxFrames / 100) * (scrollPosition / (duration / 100));
+	
+	animObject.goToAndStop(frame, true);
+	
+}
+</script>
+</body>
+</html>
